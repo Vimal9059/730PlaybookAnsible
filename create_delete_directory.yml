@@ -1,0 +1,9 @@
+---
+- name: To delete a Directory.
+  hosts: all
+  become: true
+  tasks:
+    - name: To delete a directory.
+      file:
+        path: /home/ansadmin/dir1
+        state: absent

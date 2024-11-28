@@ -1,0 +1,44 @@
+---
+- name: To install Tomcat
+  hosts: all
+  become: true
+
+  vars:
+   version: 11.0.1
+
+  tasks:
+   - name: install tomcat for RedHat
+     yum:
+       name: java
+       state: installed
+     when: ansible_os_family == "RedHat"
+
+   - name: install tomcat for Debian
+     apt:
+       name: openjdk-11-jdk
+       state: installed
+     when: ansible_os_family == "Debian"
+
+   - name: Download Tomcat from URL
+     get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-11/v{{version}}/bin/apache-tomcat-{{version}}.tar.gz
+      dest: /opt/
+
+   - name: extract file
+     unarchive:
+       src: /opt/apache-tomcat-{{version}}.tar.gz
+       dest: /opt
+       remote_src: yes
+
+   - name: To give permission for startup.sh
+     file:
+       path: /opt/apache-tomcat-{{version}}/bin/startup.sh
+       mode: 0777
+
+   - name: execute command using startup.sh
+     command: ./startup.sh
+     args:
+       chdir: /opt/apache-tomcat-{{version}}/bin
+
+
+        

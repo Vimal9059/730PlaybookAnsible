@@ -1,0 +1,12 @@
+---
+- name: This is to check the file or diectory with the same name deletion.
+  hosts: all
+  become: true
+  tasks:
+    - name: create a file to delete.
+      file:
+        path: /home/ansadmin/dir1
+        state: touch
+        mode: 0777
+        owner: akash
+

@@ -1,0 +1,7 @@
+---
+- name: create user sai
+  hosts: all
+  become: true
+  tasks:
+    - name: create one more user sai
+      user: name=sai

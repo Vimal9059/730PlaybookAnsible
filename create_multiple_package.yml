@@ -1,0 +1,9 @@
+---
+- name: Test My Playbook
+  hosts: all
+  become: true
+  tasks:
+    - name: install git, docker, httpd, tree
+      yum:
+        name: ['git', 'docker', 'tree', 'httpd']
+        state: present

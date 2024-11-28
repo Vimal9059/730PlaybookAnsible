@@ -1,0 +1,19 @@
+---
+- name: Thi playbook is to remove packages.
+  hosts: all
+  become: true
+  tasks:
+    - name: To remove httpd package
+      yum:
+        name: httpd
+        state: absent
+    - name: To remove git package
+      yum:
+        name: git
+        state: removed
+    - name: To remove tree package
+      yum:
+        name: tree
+        state: absent
+          
+

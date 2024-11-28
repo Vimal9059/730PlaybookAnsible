@@ -1,0 +1,14 @@
+---
+- name: Test My Playbook
+  hosts: all
+  become: true
+  tasks:
+   - name: create users sai, hari, akash.
+     user:
+        name: "{{item}}"
+        state: present
+     with_items:
+       - akash
+       - sai
+       - hari 
+
